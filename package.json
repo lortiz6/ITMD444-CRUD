@@ -4,7 +4,7 @@
   "description": "CRUD operation - Create, Read, Update and Delete. Using a backedn data storage for the Object with database connectivity.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
