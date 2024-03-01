@@ -65,6 +65,18 @@ router.put('/api/employee/update/:id', async (req, res) => {
   }
 });
 
-
+// Delete Employee
+router.delete('/api/employee/:id', async (req, res) => {
+  try {
+      const deletedEmployee = await Employee.findByIdAndDelete(req.params.id);
+      if (!deletedEmployee) {
+          return res.status(404).json({ error: 'Employee not found' });
+      }
+      res.status(200).json(deletedEmployee);
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 module.exports = router;
