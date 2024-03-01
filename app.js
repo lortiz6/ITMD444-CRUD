@@ -13,4 +13,7 @@ dotenv.config({path: './config/config.env'});
 
 connectDB();
 
+//Routes
+app.use('/', require('./routes/index'));
+
 app.listen(3000);
