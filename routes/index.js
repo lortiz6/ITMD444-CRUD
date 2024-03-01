@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-
-
 const {Employee} = require('../models/employee');
 
 
@@ -20,7 +18,6 @@ router.post('/api/employee/add', async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
   }
 });
-
 
 // Get Single Employee
 router.get('/api/employee/:id', async (req, res) => {
@@ -43,7 +40,6 @@ router.get('/api/employees', async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
   }
 });
-
 
 // Update Employee
 router.put('/api/employee/update/:id', async (req, res) => {
