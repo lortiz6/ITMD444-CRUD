@@ -1,18 +1,16 @@
 const express = require('express');
-const dotenv = require('dotenv')
+const dotenv = require('dotenv');
 
 
 
 const app = express();
 
 
-app.get('/', (req, res) => {
-  res.send("WELCOME TO MY PAGE!")
-});
+const connectDB = require('./config/db');
 
+//Load Config
+dotenv.config({path: './config/config.env'});
 
-app.get('/employees', (req,res) => {
-  res.send('Employees');
-})
+connectDB();
 
 app.listen(3000);
