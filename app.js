@@ -1,22 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-
-
-
 const app = express();
-app.use(bodyParser.json)
+app.use(bodyParser.json());
 
 const dotenv = require('dotenv');
-
 const connectDB = require('./config/db');
 
-//Load Config
-dotenv.config({path: './config/config.env'});
+// Load Config
+dotenv.config({ path: './config/config.env' });
 
 connectDB();
 
-//Routes
+// Routes
 app.use('/', require('./routes/index'));
 
 app.listen(3000);
