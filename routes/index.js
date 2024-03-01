@@ -5,6 +5,23 @@ const router = express.Router();
 const {Employee} = require('../models/employee');
 
 
+// Add New Employee
+router.post('/api/employee/add', async (req, res) => {
+  try {
+      const emp = new Employee({
+          name: req.body.name,
+          email: req.body.email,
+          salary: req.body.salary
+      });
+      const newEmployee = await emp.save();
+      res.status(201).json(newEmployee);
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
 // Get Single Employee
 router.get('/api/employee/:id', async (req, res) => {
   try {
@@ -27,24 +44,26 @@ router.get('/api/employees', async (req, res) => {
   }
 });
 
-// Add New Employee
-router.post('/api/employee/add', async (req, res) => {
+
+// Update Employee
+router.put('/api/employee/update/:id', async (req, res) => {
   try {
-      const emp = new Employee({
+      const { id } = req.params;
+      const emp = {
           name: req.body.name,
           email: req.body.email,
           salary: req.body.salary
-      });
-      const newEmployee = await emp.save();
-      res.status(201).json(newEmployee);
+      };
+      const updatedEmployee = await Employee.findByIdAndUpdate(id, emp, { new: true });
+      if (!updatedEmployee) {
+          return res.status(404).json({ error: 'Employee not found' });
+      }
+      res.status(200).json(updatedEmployee);
   } catch (err) {
       console.error(err);
       res.status(500).json({ error: 'Internal server error' });
   }
 });
-
-
-
 
 
 
