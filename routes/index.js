@@ -5,6 +5,16 @@ const router = express.Router();
 const {Employee} = require('../models/employee');
 
 
+// Get Single Employee
+router.get('/api/employee/:id', async (req, res) => {
+  try {
+    const employee = await Employee.findById(req.params.id);
+    res.send(employee);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Error fetching employee');
+  }
+});
 
 //Get all employees
 router.get('/api/employees', async (req, res) => {
@@ -16,9 +26,6 @@ router.get('/api/employees', async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
   }
 });
-
-
-
 
 // Add New Employee
 router.post('/api/employee/add', async (req, res) => {
@@ -35,6 +42,9 @@ router.post('/api/employee/add', async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+
+
 
 
 
